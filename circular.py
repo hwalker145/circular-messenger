@@ -3,10 +3,10 @@
 import socket as sk
 import sys
 
-IS_ORIGIN = False
+# goes to Justin
 
-destination_address = sys.argv[1]
-name = sys.argv[2]
+IS_ORIGIN = False
+DEST_ADDRESS = '10.220.20.215'
 
 if len(sys.argv) < 4:
     raise RuntimeError('Not enough arguments.\n USAGE:\n ' +
@@ -19,6 +19,6 @@ if ~(IS_ORIGIN):
     receive_socket.bind(('', 1234))
     message, addr = receive_socket.recvfrom(8192)
 
-    send_socket.sendto((message.decode() + ' ' + name).encode(), (destination_address, 1234))
+    send_socket.sendto((message.decode()).encode(), (DEST_ADDRESS, 1234))
 else: 
-    send_socket.sendto(name.encode(), (destination_address, 1234))
+    send_socket.sendto(str('Hello Salem!').encode(), (DEST_ADDRESS, 1234))
