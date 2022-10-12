@@ -1,7 +1,7 @@
 import socket as sk
 
 receiver_socket = sk.socket(sk.AF_INET, sk.SOCK_DGRAM)
-receiver_socket.bind(('', 1235))
+receiver_socket.bind(('', 1234))
 
 message, addr = receiver_socket.recvfrom(8192)
 
