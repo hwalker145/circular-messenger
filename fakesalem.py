@@ -1,11 +1,13 @@
 import socket as sk
 
-receiver_socket = sk.socket(sk.AF_INET, sk.SOCK_DGRAM)
-receiver_socket.bind(('', 1234))
+receiver_socket = sk.socket(sk.AF_INET, sk.SOCK_STREAM)
+receiver_socket.bind(('', 1235))
 
-message, addr = receiver_socket.recvfrom(8192)
+receiver_socket.listen(1)
+cSocket, addr = receiver_socket.accept()
+
+message = receiver_socket.recv(8192)
 
 print(message.decode())
 
 receiver_socket.close()
-

@@ -1,24 +1,23 @@
-# forgive me for coding this like a C program . . .
-
 import socket as sk
-import sys
 
-# goes to Justin
+# goes to 'PERSON'
 
 IS_ORIGIN = False
-DEST_ADDRESS = '10.220.20.215'
+DEST_ADDRESS = 'INSERT HERE'
 
-if len(sys.argv) < 4:
-    raise RuntimeError('Not enough arguments.\n USAGE:\n ' +
-                       '<Python executable> <codefile> <destination address> <name>')
-
-send_socket = sk.socket(sk.AF_INET, sk.SOCK_DGRAM)
+send_socket = sk.socket(sk.AF_INET, sk.SOCK_STREAM)
 
 if ~(IS_ORIGIN):
     receive_socket = sk.socket(sk.AF_INET, sk.SOCK_DGRAM)
     receive_socket.bind(('', 1234))
-    message, addr = receive_socket.recvfrom(8192)
 
-    send_socket.sendto((message.decode()).encode(), (DEST_ADDRESS, 1234))
+    receive_socket.listen(1)
+    cSocket, addr = receive_socket.accept()
+
+    message = receive_socket.recv(8192)
+
+    send_socket.connect((DEST_ADDRESS, 1234))
+    send_socket.sendall(message)
 else: 
-    send_socket.sendto(str('Hello Salem!').encode(), (DEST_ADDRESS, 1234))
+    send_socket.connect((DEST_ADDRESS, 1234))
+    send_socket.sendall(str('Hello Salem!').encode())
