@@ -8,7 +8,7 @@ DEST_ADDRESS = 'INSERT HERE'
 send_socket = sk.socket(sk.AF_INET, sk.SOCK_STREAM)
 
 if ~(IS_ORIGIN):
-    receive_socket = sk.socket(sk.AF_INET, sk.SOCK_DGRAM)
+    receive_socket = sk.socket(sk.AF_INET, sk.SOCK_STREAM)
     receive_socket.bind(('', 1234))
 
     receive_socket.listen(1)
