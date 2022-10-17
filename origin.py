@@ -1,23 +1,23 @@
 import socket as sk
 
-# goes to 'PERSON'
+# goes to 'Justin'
 
-IS_ORIGIN = False
-DEST_ADDRESS = 'INSERT HERE'
+IS_ORIGIN = True
+DEST_ADDRESS = '10.220.94.124'
 
 send_socket = sk.socket(sk.AF_INET, sk.SOCK_STREAM)
 
-if ~(IS_ORIGIN):
+if not IS_ORIGIN:
     receive_socket = sk.socket(sk.AF_INET, sk.SOCK_STREAM)
-    receive_socket.bind(('', 1234))
+    receive_socket.bind(('10.220.49.117', 1234))
 
-    receive_socket.listen(1)
+    receive_socket.listen(10)
     cSocket, addr = receive_socket.accept()
 
-    message = receive_socket.recv(8192)
+    message = receive_socket.recv(10)
 
     send_socket.connect((DEST_ADDRESS, 1234))
     send_socket.sendall(message)
-else: 
-    send_socket.connect((DEST_ADDRESS, 1234))
-    send_socket.sendall(str('Hello Salem!').encode())
+else:
+    send_socket.connect(('10.220.49.117', 1239))
+    send_socket.sendall(b'Hello Salem!')
